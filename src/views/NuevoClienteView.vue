@@ -1,5 +1,4 @@
 <script setup>
-import { reactive } from 'vue'
 import { FormKit } from '@formkit/vue';
 import RouterLink from '../components/UI/RouterLink.vue';
 import Heading from '../components/UI/Heading.vue';
@@ -9,8 +8,6 @@ defineProps({
         required: true
     }
 });
-
-
 
 const handleSubmit = (data) => {
     console.log("data", data);
