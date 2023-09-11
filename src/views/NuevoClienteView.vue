@@ -8,38 +8,38 @@ defineProps({
         required: true
     }
 });
+
+const handleSubmit = (data) => {
+    console.log("data", data);
+}
 </script>
 <template>
     <div>
         <div class="flex justify-end">
             <RouterLink to="inicio">Regresar</RouterLink>
         </div>
-        <Heading>{{ titulo }}</Heading>    
+        <Heading>{{ titulo }}</Heading>
         <div class="mx-auto mt-10 bg-white shadow">
-            <FormKit type="form" action="false">
-                <div class="p-8">
-                    <div class="grid grid-cols-1 gap-6">
-                        <div>
-                            <FormKit type="text" name="nombre" label="Nombre" placeholder="Nombre cliente" validation="required" :validation-messages="{ required: 'El nombre del cliente es obligatorio'}"/>
-                        </div>
-                        <div>
-                            <FormKit type="text" name="apellido" label="Apellido" placeholder="Apellido cliente" validation="required"/>
-                        </div>
-                        <div>
-                            <FormKit type="text" name="empresa" label="Empresa" placeholder="Empresa" validation="required"/>
-                        </div>
-                        <div>
-                            <FormKit type="text" name="email" label="Email" placeholder="Email" validation="required"/>
-                        </div>
-                        <div>
-                            <FormKit type="text" name="telefono" label="Teléfono" placeholder="No. 1234567890" validation="required"/>
-                        </div>
-                    </div>
-                    <div class="flex justify-end mt-6">
-                        <FormKit type="button" variant="primary">Agregar Cliente</FormKit>
-                    </div>
-                </div>
-            </FormKit>
+            <div class="mx-auto md:w2/3 py-20 px-6">
+                <FormKit type="form" submit-label="Guardar cliente" incomplete-message="No se han completado los datos mandatorios" @submit="handleSubmit">
+                        <FormKit type="text" name="nombre" label="Nombre" placeholder="Nombre cliente" validation="required"
+                            :validation-messages="{ required: 'El nombre del cliente es obligatorio' }"  />
+                        <FormKit type="text" name="apellido" label="Apellido" placeholder="Apellido cliente" validation="required"
+                            :validation-messages="{ required: 'El Apellido del cliente es obligatorio' }" />
+                        <FormKit type="email" name="email" label="Email" placeholder="Email" validation="required" 
+                            :validation-messages="{ required: 'El Email del cliente es obligatorio' }" />
+                        <FormKit type="tel" name="telefono" label="Teléfono" placeholder="No. 1234567890" validation="required|matches:/^[0-9]{10}$/ " 
+                            :validation-messages="{ required: 'El teléfono del cliente es obligatorio', matches:'El formato de numero debe de ser a 10 digitos.' }" />
+                        <FormKit type="text" name="empresa" label="Empresa" placeholder="Empresa"  />
+                        <FormKit type="text" name="puesto" label="Puesto" placeholder="Puesto"  />
+                </FormKit>
+            </div>
         </div>
     </div>
 </template>
+
+<style>
+.formkit-wrapper{
+    max-width: 100%;
+}
+</style>
