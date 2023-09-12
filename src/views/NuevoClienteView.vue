@@ -3,7 +3,7 @@ import { FormKit } from '@formkit/vue';
 import { useRouter } from 'vue-router';
 import RouterLink from '../components/UI/RouterLink.vue';
 import Heading from '../components/UI/Heading.vue';
-import axios from 'axios';
+import axios from '../lib/axios';
 
 const router = useRouter();
 
@@ -15,10 +15,10 @@ defineProps({
 });
 
 const handleSubmit = (data) => {
-    axios.post('http://localhost:3000/clientes', data)
+    axios.post('/clientes', data)
         .then(({ data }) => { 
             console.log(data);
-            router.push({ name: 'inicio' });
+            router.push({ name: 'listado-clientes' });
         })
         .catch(error => { console.log(error); });
 }
@@ -26,7 +26,7 @@ const handleSubmit = (data) => {
 <template>
     <div>
         <div class="flex justify-end">
-            <RouterLink to="inicio">Regresar</RouterLink>
+            <RouterLink to="listado-clientes">Regresar</RouterLink>
         </div>
         <Heading>{{ titulo }}</Heading>
         <div class="mx-auto mt-10 bg-white shadow">
