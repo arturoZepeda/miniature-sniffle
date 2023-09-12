@@ -34,7 +34,7 @@ const estadoCliente = computed(() => props.cliente.estado);
             </button>
         </td>
         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 ">
-            <RouterLink to="listado-clientes" class="text-indigo-600 hover:text-indigo-900 mr-5">Editar</RouterLink>
+            <RouterLink :to="{ name:'editar-cliente', params:{ id:cliente.id } }" class="text-indigo-600 hover:text-indigo-900 mr-5">Editar</RouterLink>
             <button class="text-red-600 hover:text-red-900">Eliminar</button>
         </td>
     </tr>

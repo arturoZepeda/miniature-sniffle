@@ -13,5 +13,7 @@ export default {
     activaCliente(id){
         return api.put(`/clientes/${id}`, {estado: true});
     },
-     
+    obtenerCliente(id){
+        return api.get(`/clientes/${id}`);
+    },
 }
