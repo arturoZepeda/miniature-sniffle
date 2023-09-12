@@ -71,6 +71,25 @@
       "empresa": "edicom",
       "puesto": "consultor",
       "id": 8
+    },
+    {
+      "nombre": "test1",
+      "apellido": "test2",
+      "email": "aaze92@gmail.com",
+      "telefono": "9876543310",
+      "empresa": "test edicom",
+      "puesto": "puesto",
+      "id": 9
+    },
+    {
+      "nombre": "a",
+      "apellido": "a",
+      "email": "aa@aa.com",
+      "telefono": "1111111111",
+      "empresa": "a",
+      "puesto": "a",
+      "estado": true,
+      "id": 10
     }
   ]
 }

@@ -3,7 +3,7 @@ import { FormKit } from '@formkit/vue';
 import { useRouter } from 'vue-router';
 import RouterLink from '../components/UI/RouterLink.vue';
 import Heading from '../components/UI/Heading.vue';
-import axios from '../lib/axios';
+import ClientesServices from '../services/ClientesServices';
 
 const router = useRouter();
 
@@ -15,7 +15,8 @@ defineProps({
 });
 
 const handleSubmit = (data) => {
-    axios.post('/clientes', data)
+    data.estado = true;
+    ClientesServices.agregarCliente(data)
         .then(({ data }) => { 
             console.log(data);
             router.push({ name: 'listado-clientes' });
