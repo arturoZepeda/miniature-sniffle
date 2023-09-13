@@ -28,6 +28,13 @@ const actualizaEstadoCliente = (id) => {
             .catch(error => { console.log(error); });
     }
 }
+const eliminaCliente = (id) => {
+    ClientesServices.deleteCliente(id)
+        .then(() => {
+            console.log('Cliente eliminado');
+        })
+        .catch(error => { console.log(error); });
+}
 
 const clienteNombre = computed(() => props.cliente.nombre + ' ' + props.cliente.apellido);
 const estadoCliente = computed(() => props.cliente.estado);
@@ -50,7 +57,7 @@ const estadoCliente = computed(() => props.cliente.estado);
         </td>
         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 ">
             <RouterLink :to="{ name:'editar-cliente', params:{ id:cliente.id } }" class="text-indigo-600 hover:text-indigo-900 mr-5">Editar</RouterLink>
-            <button class="text-red-600 hover:text-red-900">Eliminar</button>
+            <button class="text-red-600 hover:text-red-900" @click="eliminaCliente(cliente.id)">Eliminar</button>
         </td>
     </tr>
 </template>
