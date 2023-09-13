@@ -18,7 +18,7 @@ defineProps({
     }
 });
 
-const actualizaEstadoCliente = ({id,estado}) => {
+const actualizaEstado = ({id,estado}) => {
     ClientesServices.actualizaEstado(id,{estado:!estado})
         .then(() => {
             const i = clientes.value.findIndex(cliente => cliente.id === id);
@@ -26,6 +26,7 @@ const actualizaEstadoCliente = ({id,estado}) => {
         })
         .catch(error => { console.log(error); });
 }
+
 const eliminaCliente = (id) => {
     ClientesServices.deleteCliente(id)
         .then(() => {
@@ -55,7 +56,7 @@ const existenClientes = computed(() => clientes.value.length > 0);
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
-                            <Cliente v-for="cliente in clientes" :key="cliente.id" :cliente="cliente" @actualizar-estado="actualizaEstadoCliente" @elimina-cliente="eliminaCliente" />
+                            <Cliente v-for="cliente in clientes" :key="cliente.id" :cliente="cliente" @actualizar-estado="actualizaEstado" @elimina-cliente="eliminaCliente" />
                         </tbody>
                     </table>
                 </div>
