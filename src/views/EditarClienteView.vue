@@ -38,7 +38,12 @@ defineProps({
 
 
 const handleSubmit = (data) => {
-
+    data.estado= true;
+    ClientesServices.actualizarCliente(id, data)
+        .then(() => {
+            router.push({ name: 'listado-clientes' });
+        })
+        .catch(error => { console.log(error); });
 }
 </script>
 <template>

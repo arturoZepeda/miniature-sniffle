@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
-
+import ClientesServices from '../services/ClientesServices';
 const props = defineProps({
     cliente: {
         type: Object,
@@ -12,6 +12,22 @@ const props = defineProps({
         required: true
     }
 });
+
+const actualizaEstadoCliente = (id) => {
+    if (props.cliente.estado) {
+        ClientesServices.desactivaCliente(id)
+            .then(() => {
+                props.cliente.estado = false;
+            })
+            .catch(error => { console.log(error); });
+    } else {
+        ClientesServices.activaCliente(id)
+            .then(() => {
+                props.cliente.estado = true;
+            })
+            .catch(error => { console.log(error); });
+    }
+}
 
 const clienteNombre = computed(() => props.cliente.nombre + ' ' + props.cliente.apellido);
 const estadoCliente = computed(() => props.cliente.estado);
@@ -28,9 +44,8 @@ const estadoCliente = computed(() => props.cliente.estado);
             <p class="text-gray-600">{{ cliente.puesto }}</p>
         </td>
         <td class="whitespace-nowrap px-3 py-4 text-sm">
-            <button class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="estadoCliente ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">
+            <button class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="estadoCliente ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'" @click="actualizaEstadoCliente(cliente.id)">
                 {{ estadoCliente ? 'Activo' : 'Inactivo' }}
-                
             </button>
         </td>
         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 ">

@@ -16,4 +16,10 @@ export default {
     obtenerCliente(id){
         return api.get(`/clientes/${id}`);
     },
+    actualizarCliente(id, cliente){
+        return api.put(`/clientes/${id}`, cliente);
+    },
+    deleteCliente(id){
+        return api.delete(`/clientes/${id}`);
+    }
 }
