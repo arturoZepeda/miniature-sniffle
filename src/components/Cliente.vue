@@ -1,7 +1,9 @@
 <script setup>
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
-import ClientesServices from '../services/ClientesServices';
+
+defineEmits(['actualizar-estado','elimina-cliente']);
+
 const props = defineProps({
     cliente: {
         type: Object,
@@ -12,29 +14,6 @@ const props = defineProps({
         required: true
     }
 });
-
-const actualizaEstadoCliente = (id) => {
-    if (props.cliente.estado) {
-        ClientesServices.desactivaCliente(id)
-            .then(() => {
-                props.cliente.estado = false;
-            })
-            .catch(error => { console.log(error); });
-    } else {
-        ClientesServices.activaCliente(id)
-            .then(() => {
-                props.cliente.estado = true;
-            })
-            .catch(error => { console.log(error); });
-    }
-}
-const eliminaCliente = (id) => {
-    ClientesServices.deleteCliente(id)
-        .then(() => {
-            console.log('Cliente eliminado');
-        })
-        .catch(error => { console.log(error); });
-}
 
 const clienteNombre = computed(() => props.cliente.nombre + ' ' + props.cliente.apellido);
 const estadoCliente = computed(() => props.cliente.estado);
@@ -51,13 +30,13 @@ const estadoCliente = computed(() => props.cliente.estado);
             <p class="text-gray-600">{{ cliente.puesto }}</p>
         </td>
         <td class="whitespace-nowrap px-3 py-4 text-sm">
-            <button class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="estadoCliente ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'" @click="actualizaEstadoCliente(cliente.id)">
+            <button class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="estadoCliente ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'" @click="$emit('actualizar-estado',{id:cliente.id, estado:cliente.estado})">
                 {{ estadoCliente ? 'Activo' : 'Inactivo' }}
             </button>
         </td>
         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 ">
             <RouterLink :to="{ name:'editar-cliente', params:{ id:cliente.id } }" class="text-indigo-600 hover:text-indigo-900 mr-5">Editar</RouterLink>
-            <button class="text-red-600 hover:text-red-900" @click="eliminaCliente(cliente.id)">Eliminar</button>
+            <button class="text-red-600 hover:text-red-900" @click="$emit('elimina-cliente',cliente.id)">Eliminar</button>
         </td>
     </tr>
 </template>

@@ -7,11 +7,8 @@ export default {
     agregarCliente(cliente){
         return api.post("/clientes", cliente);
     },
-    desactivaCliente(id){
-        return api.patch(`/clientes/${id}`, {estado: false});
-    },
-    activaCliente(id){
-        return api.patch(`/clientes/${id}`, {estado: true});
+    actualizaEstado( id, data ){
+        return api.patch(`/clientes/${id}`, data);
     },
     obtenerCliente(id){
         return api.get(`/clientes/${id}`);

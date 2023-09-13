@@ -1,12 +1,12 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue';
-import ClienteService from '../services/ClientesServices';
+import ClientesServices from '../services/ClientesServices';
 import RouterLink from '../components/UI/RouterLink.vue';
 import Heading from '../components/UI/Heading.vue';
 import Cliente from '../components/Cliente.vue';
 const clientes = ref([]);
 onMounted(() => {
-    ClienteService.obtenerClientes()
+    ClientesServices.obtenerClientes()
         .then(({ data }) => { clientes.value = data; })
         .catch(error => { console.log(error); });
 });
@@ -17,6 +17,22 @@ defineProps({
         required: true
     }
 });
+
+const actualizaEstadoCliente = ({id,estado}) => {
+    ClientesServices.actualizaEstado(id,{estado:!estado})
+        .then(() => {
+            const i = clientes.value.findIndex(cliente => cliente.id === id);
+            clientes.value[i].estado = !estado;
+        })
+        .catch(error => { console.log(error); });
+}
+const eliminaCliente = (id) => {
+    ClientesServices.deleteCliente(id)
+        .then(() => {
+            clientes.value = clientes.value.filter(cliente => cliente.id !== id);
+        })
+        .catch(error => { console.log(error); });
+}
 
 const existenClientes = computed(() => clientes.value.length > 0);
 </script>
@@ -39,7 +55,7 @@ const existenClientes = computed(() => clientes.value.length > 0);
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
-                            <Cliente v-for="cliente in clientes" :key="cliente.id" :cliente="cliente"  />
+                            <Cliente v-for="cliente in clientes" :key="cliente.id" :cliente="cliente" @actualizar-estado="actualizaEstadoCliente" @elimina-cliente="eliminaCliente" />
                         </tbody>
                     </table>
                 </div>

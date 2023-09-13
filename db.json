@@ -7,7 +7,7 @@
       "telefono": "1234567890",
       "empresa": "edicom",
       "puesto": "consultor",
-      "id": 1,
+      "id": 3,
       "estado": true
     },
     {
@@ -17,25 +17,8 @@
       "telefono": "1234567890",
       "empresa": "edicom",
       "puesto": "consultor",
-      "id": 2
-    },
-    {
-      "nombre": "Arturo ",
-      "apellido": "Zepeda",
-      "email": "aaze92@gmail.com",
-      "telefono": "1234567890",
-      "empresa": "edicom",
-      "puesto": "consultor",
-      "id": 3
-    },
-    {
-      "nombre": "Arturo ",
-      "apellido": "Zepeda",
-      "email": "aaze92@gmail.com",
-      "telefono": "1234567890",
-      "empresa": "edicom",
-      "puesto": "consultor",
-      "id": 4
+      "id": 4,
+      "estado": true
     },
     {
       "nombre": "test",
@@ -44,25 +27,8 @@
       "telefono": "1234509876",
       "empresa": "test empresa",
       "puesto": "puyesto",
-      "id": 6
-    },
-    {
-      "nombre": "a",
-      "apellido": "a",
-      "email": "aaaa@aaa.com",
-      "telefono": "1234567890",
-      "empresa": "asasd",
-      "puesto": "sdasd",
-      "id": 7
-    },
-    {
-      "nombre": "arturo",
-      "apellido": "echavarria",
-      "email": "aaze92@gmail.com",
-      "telefono": "7222450955",
-      "empresa": "edicom",
-      "puesto": "consultor",
-      "id": 8
+      "id": 6,
+      "estado": true
     }
   ]
 }
